@@ -1,0 +1,14 @@
+{
+  "endOfLine": "lf",
+  "tabWidth": 2,
+  "singleQuote": true,
+  "semi": false,
+  "overrides": [
+    {
+      "files": ["*.css", "*.scss"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
