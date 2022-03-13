@@ -1,24 +1,28 @@
+import { ComponentStory } from '@storybook/react'
 import { Top } from '.'
 
-export const Basic = () => (
-  <Top
-    members={[
-      {
-        id: 1,
-        username: 'testuser1',
-      },
-    ]}
-    photos={[
-      {
-        id: 1,
-        title: 'testtodo1',
-        url: 'xxx',
-        thumbnailUrl: 'xxx',
-      },
-    ]}
-  />
-)
-
 export default {
-  title: 'templates/top',
+  title: 'templates/Top',
+  component: Top,
+}
+
+const Template: ComponentStory<typeof Top> = (props) => <Top {...props} />
+
+export const Default = Template.bind({})
+
+Default.args = {
+  members: [
+    {
+      id: 1,
+      username: 'username',
+    },
+  ],
+  photos: [
+    {
+      id: 1,
+      url: 'https://www.yahoo.co.jp',
+      thumbnailUrl: 'https://dummyimage.com/300x300',
+      title: 'title',
+    },
+  ],
 }
