@@ -28,7 +28,13 @@
     ],
     "import/prefer-default-export": "off",
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.spec.{ts,tsx}", "**/*.stories.{ts,tsx}"]
+      }
+    ]
   },
   "overrides": [
     // Next.js needs default exports for pages and API points
@@ -43,6 +49,15 @@
       "files": ["components/**/*.stories.tsx"],
       "rules": {
         "import/no-anonymous-default-export": "off"
+      }
+    },
+    {
+      "files": ["**/*.spec.{ts,tsx}", "**/*.stories.{ts,tsx}"],
+      "rules": {
+        "@typescript-eslint/no-unsafe-argument": ["off"],
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-unsafe-return": ["off"],
+        "@typescript-eslint/no-unsafe-member-access": ["off"]
       }
     }
   ]
