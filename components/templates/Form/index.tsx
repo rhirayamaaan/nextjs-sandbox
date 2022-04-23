@@ -14,7 +14,6 @@ type Props = {
   firstName: string
   lastName: string
   onFieldChange: (name: ValueOf<typeof fieldNames>) => React.ChangeEventHandler
-  onClick: React.MouseEventHandler
 }
 
 export const Form: React.VFC<Props> = ({
@@ -23,7 +22,7 @@ export const Form: React.VFC<Props> = ({
   lastName,
   onFieldChange,
 }) => (
-  <form onSubmit={onSubmit}>
+  <form onSubmit={onSubmit} action="*">
     <p>
       <TextField
         label="first name"
@@ -39,7 +38,7 @@ export const Form: React.VFC<Props> = ({
       />
     </p>
     <p>
-      <Button>Submit</Button>
+      <Button type='submit'>Submit</Button>
     </p>
     <p>
       <Link href="/">link</Link>
