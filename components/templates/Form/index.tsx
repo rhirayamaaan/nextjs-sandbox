@@ -1,47 +1,61 @@
 import { Button, TextField } from '@mui/material'
 
-import React from 'react'
-import { ValueOf } from '../../../types'
-import { Link } from '../../helpers/Link'
+import React, { ComponentProps } from 'react'
 
-const fieldNames = {
-  FIRST_NAME: 'firstName',
-  LAST_NAME: 'lastName',
-} as const
+import styles from './styles.module.scss'
+
+type InputFieldProps = Pick<
+  ComponentProps<typeof TextField>,
+  'name' | 'onBlur' | 'onChange' | 'error' | 'helperText' | 'disabled' | 'ref'
+>
 
 type Props = {
   onSubmit: React.FormEventHandler
-  firstName: string
-  lastName: string
-  onFieldChange: (name: ValueOf<typeof fieldNames>) => React.ChangeEventHandler
+  firstName: InputFieldProps
+  lastName: InputFieldProps
+  resultName?: string
 }
 
 export const Form: React.VFC<Props> = ({
   onSubmit,
   firstName,
   lastName,
-  onFieldChange,
+  resultName,
 }) => (
-  <form onSubmit={onSubmit} action="*">
-    <p>
-      <TextField
-        label="first name"
-        name={fieldNames.FIRST_NAME}
-        value={firstName}
-        onChange={onFieldChange('firstName')}
-      />
-      <TextField
-        label="last name"
-        name={fieldNames.LAST_NAME}
-        value={lastName}
-        onChange={onFieldChange('lastName')}
-      />
-    </p>
-    <p>
-      <Button type='submit'>Submit</Button>
-    </p>
-    <p>
-      <Link href="/">link</Link>
-    </p>
-  </form>
+  <div className={styles.form}>
+    {resultName && (
+      <div className={styles.form__result}>
+        <p>Hello! {resultName}!!</p>
+      </div>
+    )}
+    <div className={styles.form__main}>
+      <form onSubmit={onSubmit} action="*">
+        <div className={styles.form__mainHeading}>
+          <h2 className={styles.form__heading}>Enter your name</h2>
+        </div>
+        <div className={styles.form__mainBody}>
+          <ul className={styles.form__name}>
+            <li className={styles.form__nameItem}>
+              <TextField label="first name" {...firstName} />
+            </li>
+            <li className={styles.form__nameItem}>
+              <TextField label="last name" {...lastName} />
+            </li>
+          </ul>
+        </div>
+        <div className={styles.form__mainFooter}>
+          <div className={styles.form__submit}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 )

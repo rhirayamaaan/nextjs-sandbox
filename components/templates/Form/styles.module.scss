@@ -1,0 +1,45 @@
+.form {
+  padding: 16px 24px;
+
+  .form__main {
+    padding: 24px;
+    border: 1px solid #dfdfdf;
+  }
+
+  .form__result + .form__main {
+    margin-top: 16px;
+  }
+
+  .form__mainBody {
+    margin-top: 16px;
+  }
+
+  .form__mainFooter {
+    margin-top: 16px;
+  }
+
+  .form__heading {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .form__name {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -16px;
+  }
+
+  .form__nameItem {
+    margin-left: 16px;
+  }
+
+  .form__button {
+    margin-top: 16px;
+  }
+
+  .form__result {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
