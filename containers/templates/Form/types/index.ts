@@ -1,4 +1,4 @@
 import { InferType } from 'yup'
-import { schema } from '../validationSchema'
+import { buildSchema } from '../validationSchema'
 
-export type FormValuesType = InferType<typeof schema>
+export type FormValuesType = InferType<ReturnType<typeof buildSchema>>

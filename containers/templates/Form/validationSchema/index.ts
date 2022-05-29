@@ -1,6 +1,11 @@
-import { object, string } from 'yup'
+import { lazy, object, string } from 'yup'
 
-export const schema = object({
+const temporarySubmitSchema = object({
+  firstName: string(),
+  lastName: string(),
+})
+
+const submitSchema = object({
   firstName: string()
     .required('First name is required')
     .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed'),
@@ -8,3 +13,6 @@ export const schema = object({
     .required('Last name is required')
     .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed'),
 })
+
+export const buildSchema = (isSubmitting: boolean) =>
+  lazy(() => (isSubmitting ? submitSchema : temporarySubmitSchema))

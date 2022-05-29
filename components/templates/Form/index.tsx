@@ -14,6 +14,8 @@ type Props = {
   firstName: InputFieldProps
   lastName: InputFieldProps
   resultName?: string
+  onSave?: React.MouseEventHandler
+  onTemporarySave?: React.MouseEventHandler
 }
 
 export const Form: React.VFC<Props> = ({
@@ -21,6 +23,8 @@ export const Form: React.VFC<Props> = ({
   firstName,
   lastName,
   resultName,
+  onSave,
+  onTemporarySave,
 }) => (
   <div className={styles.form}>
     {resultName && (
@@ -48,8 +52,18 @@ export const Form: React.VFC<Props> = ({
             <Button
               type="submit"
               variant="contained"
+              color="secondary"
+              size="large"
+              onClick={onTemporarySave}
+            >
+              Temporary Submit
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
               color="primary"
               size="large"
+              onClick={onSave}
             >
               Submit
             </Button>

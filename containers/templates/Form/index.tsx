@@ -2,11 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Form } from '../../../components/templates/Form'
-import { schema } from './validationSchema'
+import { buildSchema } from './validationSchema'
 import { FormValuesType } from './types'
 import { useFormValue } from './hooks/useFormValue'
 
 export const FormContainer: React.VFC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const {
     register,
     handleSubmit,
@@ -15,20 +16,25 @@ export const FormContainer: React.VFC = () => {
   } = useForm<FormValuesType>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(buildSchema(isSubmitting)),
   })
 
   const [resultName, setResultName] = useState<string>()
 
   const onSubmit = useCallback<SubmitHandler<FormValuesType>>(
     (data) => {
-      setResultName(`${data.firstName} ${data.lastName}`)
+      setResultName(
+        `${data.firstName} ${data.lastName}${
+          !isSubmitting ? ' (Temporary)' : ''
+        }`
+      )
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur()
       }
       reset()
+      setIsSubmitting(false)
     },
-    [reset]
+    [reset, isSubmitting, setIsSubmitting]
   )
 
   const firstName = useFormValue('firstName', register, errors)
@@ -36,10 +42,16 @@ export const FormContainer: React.VFC = () => {
 
   return (
     <Form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(event) => handleSubmit(onSubmit)(event)}
       firstName={firstName}
       lastName={lastName}
       resultName={resultName}
+      onSave={() => {
+        setIsSubmitting(true)
+      }}
+      onTemporarySave={() => {
+        setIsSubmitting(false)
+      }}
     />
   )
 }
