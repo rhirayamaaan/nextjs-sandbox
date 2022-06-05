@@ -14,5 +14,5 @@ const submitSchema = object({
     .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed'),
 })
 
-export const buildSchema = (isSubmitting: boolean) =>
-  lazy(() => (isSubmitting ? submitSchema : temporarySubmitSchema))
+export const buildSchema = (isTemporary: boolean) =>
+  lazy(() => (isTemporary ? submitSchema : temporarySubmitSchema))

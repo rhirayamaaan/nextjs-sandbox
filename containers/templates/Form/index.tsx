@@ -7,7 +7,7 @@ import { FormValuesType } from './types'
 import { useFormValue } from './hooks/useFormValue'
 
 export const FormContainer: React.VFC = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isTemporary, setIsTemporary] = useState(false)
   const {
     register,
     handleSubmit,
@@ -16,7 +16,7 @@ export const FormContainer: React.VFC = () => {
   } = useForm<FormValuesType>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(buildSchema(isSubmitting)),
+    resolver: yupResolver(buildSchema(isTemporary)),
   })
 
   const [resultName, setResultName] = useState<string>()
@@ -25,16 +25,16 @@ export const FormContainer: React.VFC = () => {
     (data) => {
       setResultName(
         `${data.firstName} ${data.lastName}${
-          !isSubmitting ? ' (Temporary)' : ''
+          !isTemporary ? ' (Temporary)' : ''
         }`
       )
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur()
       }
       reset()
-      setIsSubmitting(false)
+      setIsTemporary(false)
     },
-    [reset, isSubmitting, setIsSubmitting]
+    [reset, isTemporary, setIsTemporary]
   )
 
   const firstName = useFormValue('firstName', register, errors)
@@ -47,10 +47,10 @@ export const FormContainer: React.VFC = () => {
       lastName={lastName}
       resultName={resultName}
       onSave={() => {
-        setIsSubmitting(true)
+        setIsTemporary(true)
       }}
       onTemporarySave={() => {
-        setIsSubmitting(false)
+        setIsTemporary(false)
       }}
     />
   )
