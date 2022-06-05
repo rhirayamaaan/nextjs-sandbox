@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { useFormValue } from '.'
+import { i18nLanguageKeys } from '../../../../../i18n/resources/languages/keys'
 
 const onBlurMock = jest.fn()
 const onChangeMock = jest.fn()
@@ -45,12 +46,14 @@ describe('useFormValue', () => {
     const { result } = renderHook(() =>
       useFormValue('firstName', registerMock, {
         firstName: {
-          message: 'First name is required',
+          message: i18nLanguageKeys.FORM_VALIDATION_REQUIRED,
           type: 'required',
         },
       })
     )
     expect(result.current.error).toBe(true)
-    expect(result.current.helperText).toBe('First name is required')
+    expect(result.current.helperText).toBe(
+      i18nLanguageKeys.FORM_VALIDATION_REQUIRED
+    )
   })
 })

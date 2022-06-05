@@ -1,0 +1,28 @@
+.header {
+  background-color: #222;
+  color: #fff;
+
+  .header__container {
+    display: flex;
+    padding: 0 24px;
+    align-items: center;
+    height: 56px;
+  }
+
+  .header__logo {
+    font-size: 24px;
+  }
+
+  .header__language {
+    margin-left: auto;
+  }
+
+  .header__languageButton {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header__languageButtonText {
+    margin-left: 4px;
+  }
+}

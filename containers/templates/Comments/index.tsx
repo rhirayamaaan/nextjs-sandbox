@@ -1,15 +1,17 @@
 import React from 'react'
-import { useCommentService } from '../../../services/templates/hooks/useCommentsService'
+import { useCommentsService } from '../../../services/templates/hooks/useCommentsService'
 import { useCommentsData } from './hooks/useCommentsData'
 
 export const CommentsContainer: React.VFC = () => {
-  const data = useCommentService()
+  const data = useCommentsService()
 
-  const { items } = useCommentsData(data)
+  const items = useCommentsData(data)
 
-  if (errors?.length) {
-    throw errors
+  if (data.errors?.length) {
+    throw data.errors
   }
+
+  console.log(items)
 
   return <>comments</>
 }

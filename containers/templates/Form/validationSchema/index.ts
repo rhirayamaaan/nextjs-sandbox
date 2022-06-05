@@ -1,4 +1,5 @@
 import { lazy, object, string } from 'yup'
+import { i18nLanguageKeys } from '../../../../i18n/resources/languages/keys'
 
 const temporarySubmitSchema = object({
   firstName: string(),
@@ -7,12 +8,12 @@ const temporarySubmitSchema = object({
 
 const submitSchema = object({
   firstName: string()
-    .required('First name is required')
-    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed'),
+    .required(i18nLanguageKeys.FORM_VALIDATION_REQUIRED)
+    .matches(/^[aA-zZ\s]+$/, i18nLanguageKeys.FORM_VALIDATION_ALPHABET),
   lastName: string()
-    .required('Last name is required')
-    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed'),
+    .required(i18nLanguageKeys.FORM_VALIDATION_REQUIRED)
+    .matches(/^[aA-zZ\s]+$/, i18nLanguageKeys.FORM_VALIDATION_ALPHABET),
 })
 
 export const buildSchema = (isTemporary: boolean) =>
-  lazy(() => (isTemporary ? submitSchema : temporarySubmitSchema))
+  lazy(() => (!isTemporary ? submitSchema : temporarySubmitSchema))

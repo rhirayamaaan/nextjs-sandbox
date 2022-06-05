@@ -19,15 +19,30 @@ export const FormContainer: React.VFC = () => {
     resolver: yupResolver(buildSchema(isTemporary)),
   })
 
-  const [resultName, setResultName] = useState<string>()
+  const [resultName, setResultName] = useState<
+    { firstName?: string; lastName?: string; isTemporary: boolean } | undefined
+  >(undefined)
 
   const onSubmit = useCallback<SubmitHandler<FormValuesType>>(
     (data) => {
-      setResultName(
-        `${data.firstName} ${data.lastName}${
-          !isTemporary ? ' (Temporary)' : ''
-        }`
-      )
+      if (isTemporary) {
+        setResultName({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          isTemporary,
+        })
+      } else {
+        setResultName(
+          data.firstName && data.lastName
+            ? {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                isTemporary,
+              }
+            : undefined
+        )
+      }
+
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur()
       }
@@ -47,10 +62,10 @@ export const FormContainer: React.VFC = () => {
       lastName={lastName}
       resultName={resultName}
       onSave={() => {
-        setIsTemporary(true)
+        setIsTemporary(false)
       }}
       onTemporarySave={() => {
-        setIsTemporary(false)
+        setIsTemporary(true)
       }}
     />
   )
