@@ -14,6 +14,9 @@ i18n
       lookupCookie: i18nCookieKey,
       order: ['cookie', 'navigator'],
       caches: ['cookie'],
+      cookieOptions: {
+        maxAge: 60 * 60 * 24 * 365 * 5, // 5 years
+      },
     },
     defaultNS: i18nResourceNamespaces.TRANSLATION,
     keySeparator: false,
