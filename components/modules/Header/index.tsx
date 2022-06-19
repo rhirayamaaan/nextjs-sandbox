@@ -1,5 +1,5 @@
 import LanguageIcon from '@mui/icons-material/Language'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { i18nLanguageKeys } from '../../../i18n/resources/languages/keys'
 import { Link } from '../../helpers/Link'
