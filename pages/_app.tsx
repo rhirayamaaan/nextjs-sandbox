@@ -1,23 +1,61 @@
 import 'destyle.css'
 import '../styles/globals.css'
 import type { AppPropsWithLayout } from 'next/app'
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
-import { useMemo, useState } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import React, { useMemo, useState } from 'react'
 import '../i18n'
+import { useRouter } from 'next/router'
+import Error from 'next/error'
 
-const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+const NotFoundHandler: React.VFC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const router = useRouter()
+
+  // Check router is ready
+  if (!router.isReady) {
+    return <>{children}</>
+  }
+
+  // Allow Home Page
+  if (router.route === '/' && router.asPath === '/') {
+    return <>{children}</>
+  }
+
+  // Allow Pages in /pages Directory
+  if (router.route !== '/') {
+    return <>{children}</>
+  }
+
+  return <Error statusCode={404} />
+}
+
+const SafeHydrate: React.VFC<{ children: React.ReactNode }> = ({
+  children,
+}) => (
+  <div suppressHydrationWarning>
+    {typeof window === 'undefined' ? null : children}
+  </div>
+)
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = useMemo(
     () => Component.getLayout ?? ((page: React.ReactNode) => page),
     [Component]
   )
   const [queryClient] = useState(() => new QueryClient())
+
   return getLayout(
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
-      </Hydrate>
-    </QueryClientProvider>
+    <SafeHydrate>
+      <NotFoundHandler>
+        {typeof window === 'undefined' ? null : (
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
+        )}
+      </NotFoundHandler>
+    </SafeHydrate>
   )
 }
 
-export default MyApp
+export default App

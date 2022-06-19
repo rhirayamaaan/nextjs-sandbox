@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
+import { Link } from '../../helpers/Link'
 import styles from './styles.module.scss'
 
 type Props = {
@@ -17,6 +18,9 @@ type Props = {
 
 export const Top: React.VFC<Props> = ({ members, photos }) => (
   <div className={styles.top}>
+    <Link href="/users">/users</Link> |{' '}
+    <Link href="/users/xxx">/users/xxx</Link> | <Link href="/xxx">/xxx</Link> |{' '}
+    <Link href="/form">/form</Link>
     {photos.length > 0 ? (
       <div className={styles.top__item}>
         <Typography variant="h2">photos</Typography>

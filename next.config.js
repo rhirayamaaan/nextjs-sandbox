@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     domains: ['via.placeholder.com'],
   },
+  trailingSlash: true,
+  async rewrites() {
+    return [
+      {
+        source: '/:any*',
+        destination: '/',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
