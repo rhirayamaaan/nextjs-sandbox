@@ -19,13 +19,13 @@ export const get =
       url.search = new URLSearchParams(parameterEntries).toString()
     }
 
-    const response = await fetch(url.href, {
+    const data = await fetch(url.href, {
       method: 'GET',
     }).catch((error) => {
       throw error
     })
 
-    const result = (await response.json()) as Promise<GetResponsesType[T]>
+    const result = (await data.json()) as Promise<GetResponsesType[T]>
 
     return result
   }
