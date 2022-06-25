@@ -38,7 +38,7 @@ export const Form: React.VFC<Props> = ({
 }) => {
   const { t } = useTranslation()
 
-  const resultNameInterporation = {
+  const resultNameInterpolation = {
     [i18nInterpolations[i18nKeys.FORM_GREETING].firstName]:
       resultName?.firstName,
     [i18nInterpolations[i18nKeys.FORM_GREETING].lastName]: resultName?.lastName,
@@ -49,7 +49,7 @@ export const Form: React.VFC<Props> = ({
       {resultName && (
         <div className={styles.form__result}>
           <p>
-            {t(i18nKeys.FORM_GREETING, resultNameInterporation)}
+            {t(i18nKeys.FORM_GREETING, resultNameInterpolation)}
             {resultName.isTemporary && t(i18nKeys.FORM_GREETING_TEMPORARY)}
           </p>
         </div>
