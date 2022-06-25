@@ -33,7 +33,11 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/*.spec.{ts,tsx}", "**/*.stories.{ts,tsx}"]
+        "devDependencies": [
+          "**/*.spec.{ts,tsx}",
+          "**/*.stories.{ts,tsx}",
+          "jest/*"
+        ]
       }
     ]
   },

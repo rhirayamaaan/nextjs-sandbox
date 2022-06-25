@@ -7,4 +7,8 @@ module.exports = {
       tsconfig: './tsconfig.test.json',
     },
   },
+  transform: {
+    '\\.(svg|png|jpg|jpeg|gif|css|scss)$': '<rootDir>/jest/fileTransformer.js',
+  },
+  testEnvironment: 'jsdom',
 }
