@@ -14,6 +14,8 @@ type Props = {
     url: string
     thumbnailUrl: string
   }[]
+  isClicked: boolean
+  onClick: (event?: MouseEvent) => void
 }
 
 export const Top: React.VFC<Props> = ({ members, photos }) => (

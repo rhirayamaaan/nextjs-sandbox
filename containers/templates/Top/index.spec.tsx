@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 
-import { render } from '@testing-library/react'
+import { render, waitFor, act } from '@testing-library/react'
 import { useTopService } from '../../../services/templates/hooks/useTopService'
 import { Top } from '../../../components/templates/Top'
 
 import { TopContainer } from '.'
+
+import { testComponentProps } from '../../../jest/utils/testComponentProps'
 
 jest.mock('../../../services/templates/hooks/useTopService', () => ({
   useTopService: jest.fn(),
@@ -22,7 +24,7 @@ describe('Top Container', () => {
     jest.clearAllMocks()
   })
 
-  it('should render Top Component on success', () => {
+  it('should render Top Component on success', async () => {
     useTopServiceMock.mockReturnValue({
       data: {},
       loading: false,
@@ -31,7 +33,19 @@ describe('Top Container', () => {
 
     render(<TopContainer />)
 
-    expect(TopMock).toBeCalledTimes(1)
+    testComponentProps(TopMock)(async (props: ComponentProps<typeof Top>) => {
+      expect(props.isClicked).toBe(false)
+      expect(TopMock).toBeCalledTimes(1)
+
+      act(() => {
+        props.onClick()
+      })
+
+      await waitFor(() => [props.isClicked])
+
+      expect(TopMock).toBeCalledTimes(2)
+      expect(props.isClicked).toBe(true)
+    })
   })
 
   it('should throw errors that occur in useTopService', () => {

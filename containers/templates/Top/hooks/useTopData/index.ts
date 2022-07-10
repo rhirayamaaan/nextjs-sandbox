@@ -1,6 +1,17 @@
+import { useCallback, useState } from 'react'
 import { useTopService } from '../../../../../services/templates/hooks/useTopService'
 
-export const useTopData = ({ data }: ReturnType<typeof useTopService>) => {
+export const useTopData = (
+  { data }: ReturnType<typeof useTopService>,
+  callback?: () => void
+) => {
+  const [isClicked, setIsClicked] = useState(false)
+
+  const onClick = useCallback(() => {
+    callback?.()
+    setIsClicked(true)
+  }, [setIsClicked, callback])
+
   const members =
     data?.users
       ?.filter(
@@ -26,5 +37,7 @@ export const useTopData = ({ data }: ReturnType<typeof useTopService>) => {
   return {
     members,
     photos,
+    isClicked,
+    onClick,
   }
 }

@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react-hooks'
 import { useTopData } from '.'
 
 const stub = {
@@ -43,7 +43,7 @@ const stub = {
 }
 
 describe('useTopData', () => {
-  it('returns a correct members object', () => {
+  it('returns a correct objects', () => {
     const { result } = renderHook(() => useTopData(stub))
 
     expect(result.current).toEqual({
@@ -61,7 +61,20 @@ describe('useTopData', () => {
           thumbnailUrl: 'dummy photo thumbnail url',
         },
       ],
+      isClicked: false,
+      onClick: expect.any(Function),
     })
+  })
+
+  it('returns onClick including callback of second argument', () => {
+    const callbackMock = jest.fn()
+    const { result } = renderHook(() => useTopData(stub, callbackMock))
+
+    act(() => {
+      result.current.onClick()
+    })
+
+    expect(callbackMock).toHaveBeenCalledTimes(1)
   })
 
   it('returns an empty array of members when users is an empty array', () => {
