@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCommentsService } from '../../../services/templates/hooks/useCommentsService'
+import { useCommentsService } from '@/services/templates/hooks/useCommentsService'
 import { useCommentsData } from './hooks/useCommentsData'
 
 export const CommentsContainer: React.VFC = () => {

@@ -1,6 +1,6 @@
-import { REST_HOST } from '../../constants'
-import { ValueOf } from '../../../types'
+import { ValueOf } from '@/types'
 import { getEndpointPaths } from './constants'
+import { REST_HOST } from '../../constants'
 import { GetEndpointParametersType, GetResponsesType } from './types'
 
 export const get =

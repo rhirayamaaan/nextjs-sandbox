@@ -2,11 +2,11 @@ import { Button, TextField } from '@mui/material'
 
 import React, { ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
-import { i18nLanguageKeys as i18nKeys } from '../../../i18n/resources/languages/keys'
-import { i18nLanguageInterpolations as i18nInterpolations } from '../../../i18n/resources/languages/interpolations'
+import { i18nLanguageKeys as i18nKeys } from '@/i18n/resources/languages/keys'
+import { i18nLanguageInterpolations as i18nInterpolations } from '@/i18n/resources/languages/interpolations'
 
+import { ValueOf } from '@/types'
 import styles from './styles.module.scss'
-import { ValueOf } from '../../../types'
 
 type InputFieldProps = Pick<
   ComponentProps<typeof TextField>,

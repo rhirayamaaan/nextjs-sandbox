@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "resolveJsonModule": false,
     "jsx": "react"
-  },
-  "exclude": ["node_modules"]
+  }
 }

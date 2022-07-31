@@ -1,18 +1,18 @@
 import React, { ComponentProps } from 'react'
 
 import { render, waitFor, act } from '@testing-library/react'
-import { useTopService } from '../../../services/templates/hooks/useTopService'
-import { Top } from '../../../components/templates/Top'
+import { useTopService } from '@/services/templates/hooks/useTopService'
+import { Top } from '@/components/templates/Top'
 
 import { TopContainer } from '.'
 
-import { testComponentProps } from '../../../jest/utils/testComponentProps'
+import { testComponentProps } from '@/jest/utils/testComponentProps'
 
-jest.mock('../../../services/templates/hooks/useTopService', () => ({
+jest.mock('@/services/templates/hooks/useTopService', () => ({
   useTopService: jest.fn(),
 }))
 
-jest.mock('../../../components/templates/Top', () => ({
+jest.mock('@/components/templates/Top', () => ({
   Top: jest.fn().mockImplementation(() => 'Top Component'),
 }))
 

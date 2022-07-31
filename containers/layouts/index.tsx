@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Layout } from '../../components/layouts'
-import { switchLocale, toLocale } from '../../i18n/functions'
+import { Layout } from '@/components/layouts'
+import { switchLocale, toLocale } from '@/i18n/functions'
 
 type Props = {
   children: React.ReactNode

@@ -36,11 +36,13 @@
         "devDependencies": [
           "**/*.spec.{ts,tsx}",
           "**/*.stories.{ts,tsx}",
-          "jest/*"
+          "jest/*",
+          "**/*.config.{js,ts}"
         ]
       }
     ]
   },
+  "ignorePatterns": ["jest.config.js"],
   "overrides": [
     // Next.js needs default exports for pages and API points
     {
@@ -70,6 +72,23 @@
       "rules": {
         "jsx-a11y/anchor-is-valid": "off",
         "jsx-a11y/no-static-element-interactions": "off"
+      }
+    },
+    {
+      "files": ["*.config.{js,ts}"],
+      "rules": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".json"]
+          }
+        },
+        "import/no-anonymous-default-export": [
+          "warn",
+          {
+            "allowObject": false
+          }
+        ],
+        "@typescript-eslint/no-var-requires": ["off"]
       }
     }
   ]

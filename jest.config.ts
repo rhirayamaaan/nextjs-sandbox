@@ -1,6 +1,5 @@
-module.exports = {
+export default {
   preset: 'ts-jest',
-  modulePaths: ['components/', 'containers/', 'services/', 'api/'],
   testMatch: ['**/*.spec.ts?(x)'],
   globals: {
     'ts-jest': {
@@ -9,6 +8,9 @@ module.exports = {
   },
   transform: {
     '\\.(svg|png|jpg|jpeg|gif|css|scss)$': '<rootDir>/jest/fileTransformer.js',
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
   },
   testEnvironment: 'jsdom',
 }

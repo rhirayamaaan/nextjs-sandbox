@@ -1,7 +1,7 @@
 import LanguageIcon from '@mui/icons-material/Language'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { i18nLanguageKeys } from '../../../i18n/resources/languages/keys'
+import { i18nLanguageKeys } from '@/i18n/resources/languages/keys'
 import { Link } from '../../helpers/Link'
 
 import styles from './styles.module.scss'

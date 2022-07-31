@@ -1,5 +1,5 @@
 import { QueryClient, useQuery } from 'react-query'
-import { ValueOf } from '../../../types'
+import { ValueOf } from '@/types'
 import { get } from '../../methods/get'
 import { getEndpointPaths } from '../../methods/get/constants'
 import {

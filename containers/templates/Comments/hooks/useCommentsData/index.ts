@@ -1,4 +1,4 @@
-import { useCommentsService } from '../../../../../services/templates/hooks/useCommentsService'
+import { useCommentsService } from '@/services/templates/hooks/useCommentsService'
 
 export const useCommentsData = ({
   data,

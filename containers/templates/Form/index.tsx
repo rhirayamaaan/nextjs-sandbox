@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Form } from '../../../components/templates/Form'
+import { Form } from '@/components/templates/Form'
 import { buildSchema } from './validationSchema'
 import { FormValuesType } from './types'
 import { useFormValue } from './hooks/useFormValue'
