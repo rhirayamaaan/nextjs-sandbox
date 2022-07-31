@@ -33,7 +33,7 @@ describe('Top Container', () => {
 
     render(<TopContainer />)
 
-    testComponentProps(TopMock)(async (props: ComponentProps<typeof Top>) => {
+    testComponentProps(TopMock, async (props: ComponentProps<typeof Top>) => {
       expect(props.isClicked).toBe(false)
       expect(TopMock).toBeCalledTimes(1)
 
