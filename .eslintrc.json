@@ -76,16 +76,18 @@
     },
     {
       "files": ["*.config.{js,ts}"],
-      "rules": {
+      "settings": {
         "import/resolver": {
           "node": {
             "extensions": [".json"]
           }
-        },
+        }
+      },
+      "rules": {
         "import/no-anonymous-default-export": [
           "warn",
           {
-            "allowObject": false
+            "allowObject": true
           }
         ],
         "@typescript-eslint/no-var-requires": ["off"]

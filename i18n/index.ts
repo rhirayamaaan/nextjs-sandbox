@@ -24,3 +24,5 @@ i18n
       escapeValue: false, // not needed for react
     },
   })
+
+export default i18n
