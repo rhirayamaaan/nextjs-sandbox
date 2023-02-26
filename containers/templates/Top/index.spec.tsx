@@ -4,9 +4,8 @@ import { render, waitFor, act } from '@testing-library/react'
 import { useTopService } from '@/services/templates/hooks/useTopService'
 import { Top } from '@/components/templates/Top'
 
-import { TopContainer } from '.'
-
 import { testComponentProps } from '@/jest/utils/testComponentProps'
+import { TopContainer } from '.'
 
 jest.mock('@/services/templates/hooks/useTopService', () => ({
   useTopService: jest.fn(),

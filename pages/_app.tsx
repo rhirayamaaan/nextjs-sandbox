@@ -2,7 +2,7 @@ import 'destyle.css'
 import '../styles/globals.css'
 import type { AppPropsWithLayout } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import '../i18n'
 import { useRouter } from 'next/router'
 import Error from 'next/error'
@@ -32,11 +32,17 @@ const NotFoundHandler: React.VFC<{ children: React.ReactNode }> = ({
 
 const SafeHydrate: React.VFC<{ children: React.ReactNode }> = ({
   children,
-}) => (
-  <div suppressHydrationWarning>
-    {typeof window === 'undefined' ? null : children}
-  </div>
-)
+}) => {
+  const [isRendered, setRendered] = useState(false)
+  useEffect(() => {
+    setRendered(true)
+  }, [])
+  return isRendered ? (
+    <div suppressHydrationWarning>
+      {typeof window === 'undefined' ? null : children}
+    </div>
+  ) : null
+}
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = useMemo(
@@ -48,11 +54,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return getLayout(
     <SafeHydrate>
       <NotFoundHandler>
-        {typeof window === 'undefined' ? null : (
-          <QueryClientProvider client={queryClient}>
-            <Component {...pageProps} />
-          </QueryClientProvider>
-        )}
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </NotFoundHandler>
     </SafeHydrate>
   )

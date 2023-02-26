@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { i18nLanguageKeys } from '@/i18n/resources/languages/keys'
 import { useFormValue } from '.'
 

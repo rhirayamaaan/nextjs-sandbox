@@ -7,6 +7,13 @@ type Props = {
   onKeyPress?: AnchorHTMLAttributes<HTMLAnchorElement>['onKeyPress']
 } & React.ComponentProps<typeof NextLink>
 
-export const Link: React.VFC<Props> = ({ className, onClick, onKeyPress, children, href, ...nextLinkProps }) => <NextLink href={href} {...nextLinkProps}>
-  <a className={className} onClick={onClick} onKeyPress={onKeyPress}>{children}</a>
-</NextLink>
+export const Link: React.VFC<Props> = ({
+  onClick,
+  onKeyPress,
+  children,
+  ...nextLinkProps
+}) => (
+  <NextLink onClick={onClick} onKeyPress={onKeyPress} {...nextLinkProps}>
+    {children}
+  </NextLink>
+)
